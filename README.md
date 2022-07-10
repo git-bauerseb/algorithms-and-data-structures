@@ -23,5 +23,12 @@ The implementation is done for learning in C++ and serves as a basis for other p
 [ ] Chapter 3
 
 
+[ ] Chapter 4
+    - [x] 4.1
+
+
 [ ] Chapter 15 - Dynamic Programming
     - [x] 15.1
+    - [ ] 15.2
+    - [x] 15.3
+    - [ ] 15.4

@@ -101,4 +101,46 @@ void printCutRodSolution(int* p, int n) {
     }
 }
 
+/*
+    Chapter 15.4 - Longest common subsequence
+*/
+void longestCommonSubSeq(char* x, char* y, int m, int n) {
+
+    int c[m+1][n+1];
+
+    for (int i = 0; i <= m; i++) {
+        for (int j = 0; j <= n; j++) {
+            if (i == 0 || j == 0)
+                c[i][j] = 0;
+            else if (x[i - 1] == y[j - 1])
+                c[i][j] = c[i - 1][j - 1] + 1;
+            else
+                c[i][j] = std::max(c[i - 1][j], c[i][j - 1]);
+        }
+    }
+
+    int index = c[m][n];
+
+    char seq[index + 1];
+    seq[index] = '\0';
+
+    int i = m;
+    int j = n;
+    while (i > 0 && j > 0) {
+        if (x[i-1] == y[j-1]) {
+            seq[index - 1] = x[i-1];
+            i--;
+            j--;
+            index--;
+        } else if (c[i-1][j] > c[i][j-1]) {
+            i--;
+        } else {
+            j--;
+        }
+    }
+
+    // Print out longest common subsequence
+    std::cout << seq << "\n";
+}
+
 #endif
