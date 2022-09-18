@@ -8,6 +8,7 @@
 #include "../include/i2a/exercises.h"
 #include "../include/i2a/random.h"
 #include "../include/i2a/elem_structures.h"
+#include "../include/i2a/matrix.h"
 
 
 void maximum_subarray_test() {
@@ -104,7 +105,7 @@ int main(int argc, char** argv) {
     std::cout << "Index [high]: " << res.m_t2 << "\n";
     std::cout << "Sum : " << res.m_t3 << "\n";
     */
-    
+
     // maximum_subarray_test();
     /*
     int price[17] = {100,113,110,85,105,102,86,63,81,101,94,106,101,79,94,90,97};
@@ -154,6 +155,7 @@ int main(int argc, char** argv) {
     }
     */
 
+    /*
     using namespace i2a::structures;
 
     DLList<int> l{1,2,3,4,5,6};
@@ -164,6 +166,50 @@ int main(int argc, char** argv) {
         };
 
     l.traverse<decltype(lambda)>(lambda);
+    */
+
+
+    using namespace i2a::math;
+
+    Matrix m1(4, 4);
+    m1(0, 0) = 5;
+    m1(1,0) = 2;
+    m1(2,0) = 6;
+    m1(3,0) = 1;
+    m1(0, 1) = 0;
+    m1(1,1) = 6;
+    m1(2,1) = 2;
+    m1(3,1) = 0;
+
+    m1(0, 2) = 3;
+    m1(1,2) = 8;
+    m1(2,2) = 1;
+    m1(3,2) = 4;
+
+    m1(0, 3) = 1;
+    m1(1,3) = 8;
+    m1(2,3) = 5;
+    m1(3,3) = 6;
+
+    Matrix m2(4,4);
+    m2(0,0) = 7;
+    m2(1,0) = 5;
+    m2(2,0) = 8;
+    m2(3,0) = 0;
+    m2(0,1) = 1;
+    m2(1,1) = 8;
+    m2(2,1) = 2;
+    m2(3,1) = 6;
+    m2(0,2) = 9;
+    m2(1,2) = 4;
+    m2(2,2) = 3;
+    m2(3,2) = 8;
+    m2(0,3) = 5;
+    m2(1,3) = 3;
+    m2(2,3) = 7;
+    m2(3,3) = 9;
+
+    std::cout << Matrix::strassenMultiplication(m1,m2) << "\n";
 
     return 0;
 }

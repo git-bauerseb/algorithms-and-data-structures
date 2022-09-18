@@ -10,7 +10,8 @@
 #define STACK_INIT_SIZE 8
 #define QUEUE_INIT_SIZE 8
 
-namespace i2a::structures {
+namespace i2a {
+    namespace structures {
 
     /*
         STACK
@@ -174,18 +175,22 @@ namespace i2a::structures {
                 m_head = nullptr;
             }
 
+            ~DLList<T>();
+
             DLList<T>(std::initializer_list<T> list) {
 
                 DLNode* head = nullptr;
 
                 if (list.size() > 0) {
                     head = new DLNode(list.begin()[0]);
+                    head->previous = nullptr;
                 }
 
                 DLNode* tmp = head;
 
                 for(int i = 1; i < list.size(); ++i) {
                     tmp->next = new DLNode(list.begin()[i]);
+                    tmp->next->previous = tmp;
                     tmp = tmp->next;    
                 }
 
@@ -195,12 +200,33 @@ namespace i2a::structures {
             template<typename F>
             void traverse(F& lambda);
 
+            // Search in DLList for presence of key
+            // Time complexity: O(n)
             DLNode* search(T key);
+
+            // Insert at beginning of DLList the provided key
+            // Time complexity: O(1)
+            void insertBegin(T key);
+
+            // Delete key from DLList. If key is not present, nothing changes
+            // Time complexity: O(n)
+            void deleteElement(T key);
 
         private:
             DLNode* m_head;
 
     };
+
+    template<typename T>
+    DLList<T>::~DLList() {
+        DLNode* tmp = m_head;
+
+        while (tmp != nullptr) {
+            DLNode* next = tmp->next;
+            delete tmp;
+            tmp = next;
+        }
+    }
 
     template<typename T>
     template<typename F>
@@ -223,6 +249,37 @@ namespace i2a::structures {
 
         return tmp;
     }
-}
+
+
+    template<typename T>
+    void DLList<T>::insertBegin(T key) {
+        DLNode* n_node = new DLNode(key);
+        n_node->next = m_head;
+        n_node->previous = nullptr;
+
+        if (m_head != nullptr) {
+            m_head->previous = n_node;
+        }
+
+        m_head = n_node;
+    }
+
+    template<typename T>
+    void DLList<T>::deleteElement(T key) {
+        auto node = search(key);
+        auto previous = node->previous;
+        auto next = node->next;
+
+        if (previous != nullptr) {
+            previous->next = next;
+        }
+
+        if (next != nullptr) {
+            next->previous = previous;
+        }
+
+        delete node;
+    }
+} }
 
 #endif

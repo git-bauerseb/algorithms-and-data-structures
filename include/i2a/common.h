@@ -19,4 +19,15 @@ class Triple {
 const int MAX_INT = (1 << 28);
 const int MIN_INT = -(1 << 28);
 
+bool isPowerOfTwo(int x) {
+    int set = 0;
+    for (int i = 0; i < 32; i++) {
+        if (x & (1 << i)) {
+            set++;
+        }
+    }
+
+    return set == 1;
+}
+
 #endif
