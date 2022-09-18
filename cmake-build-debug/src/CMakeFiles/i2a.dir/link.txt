@@ -1,0 +1,1 @@
+/usr/bin/c++  -g   CMakeFiles/i2a.dir/main.cpp.o  -o i2a 

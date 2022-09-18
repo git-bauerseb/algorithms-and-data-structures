@@ -1,0 +1,1 @@
+/usr/bin/c++  -g   CMakeFiles/i2a_test.dir/dllist_test.cpp.o  -o i2a_test  ../lib/libgtest.a ../lib/libgmock.a ../lib/libgtest_main.a ../lib/libgtest.a -lpthread 
